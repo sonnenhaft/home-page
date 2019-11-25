@@ -4,6 +4,7 @@ import AlternativeLayout from './AlternativeLayout.vue'
 import MainLayout from './MainLayout'
 import { setLinks } from './MainMenu.vue'
 import ThreeJsPage from './ThreeJsPage'
+import GitHubProjects from './GithubProjects'
 import TodosPage from './TodosPage'
 
 import PrettyCheckboxVue from 'pretty-checkbox-vue';
@@ -27,30 +28,6 @@ const RootPage = {
   components: { MainLayout }
 };
 
-const GitProjectsPage = {
-  template: `<AlternativeLayout>    
-    <p>
-        You see here my github projects. It is freelance, or incomplete freelance, <br>
-        or some demo projects, do not expect quality here, I just packed everything in single place
-    </p>
-    
-    <h4>
-        <a href="https://sonnenhaft.github.io/hong-chart/">Hong chart</a>
-    </h4>    
-    <div style="transform: scale(0.5);transform-origin: top left;margin-bottom: -400px;">
-        <iframe width="1050" height="800" src="https://sonnenhaft.github.io/hong-chart/"/>
-    </div>
-    
-    <h4>
-        <a href="https://dbs-chart.netlify.com/">DBS chart</a>            
-    </h4>
-    <div style="transform: scale(0.5);transform-origin: top left;margin-bottom: -400px;">
-        <iframe width="1050" height="800" src="https://dbs-chart.netlify.com/"></iframe>
-    </div>    
-  </AlternativeLayout>`,
-  components: { AlternativeLayout }
-};
-
 const pageNotFound404 = {
   template: `<MainLayout><h1>Not found</h1><p>Page not found</p></MainLayout>`,
   components: { MainLayout }
@@ -63,7 +40,7 @@ const altLayout = obj => ({
 
 const links = [
   { path: '/', text: 'Root', component: RootPage },
-  { path: 'git-projects', text: 'Git projects', component: GitProjectsPage },
+  { path: 'git-projects', text: 'Git projects', component: altLayout({ GitHubProjects }) },
   { path: 'globe', text: 'ThreeJS', component: altLayout({ ThreeJsPage }) },
   { path: 'todos', text: 'My TODOs', component: altLayout({ TodosPage }) },
   {
