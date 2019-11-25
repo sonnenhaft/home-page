@@ -1,62 +1,82 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainLayout from './MainLayout/MainLayout.vue'
-import NavigationMenu from './NavigationMenu.vue'
+import AlternativeLayout from './AlternativeLayout.vue'
 import TodosPage from './TodosPage/TodosPage.vue'
+import ThreeJsPage from './ThreeJsPage/ThreeJsPage.vue'
 
-Vue.use(NavigationMenu)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
-const VladdsPage = {
-  template: `<main-layout>
-   <h1>Vladd's</h1>
-   <p>      
-      Vladd's is a home place for <br/>
-      one particular engineer.
-    </p>
- </main-layout>`,
-  components: { MainLayout }
+const RootPage = {
+  template: `<MainLayout>
+<h1>TADA!!</h1>
+<p>      
+  My, yet another try, <br/>
+  for home page ;-)
+</p>
+</MainLayout>`,
+  components: { MainLayout },
 };
 
-const MyProjectsPage = {
-  template: `<main-layout>
- <h1>My projects</h1>
- <p>Here I want to leave my projects</p>
- </main-layout>`,
-  components: { MainLayout }
+const GitProjectsPage = {
+  template: `<AlternativeLayout>    
+    <p>
+        You see here my github projects. It is freelance, or incomplete freelance, <br>
+        or some demo projects, do not expect quality here, I just packed everything in single place
+    </p>
+    
+    <h4>
+        <a href="https://sonnenhaft.github.io/hong-chart/">Hong chart</a>
+    </h4>    
+    <div style="transform: scale(0.5);transform-origin: top left;margin-bottom: -400px;">
+        <iframe width="1050" height="800" src="https://sonnenhaft.github.io/hong-chart/"/>
+    </div>
+    
+    <h4>
+        <a href="https://dbs-chart.netlify.com/">DBS chart</a>            
+    </h4>
+    <div style="transform: scale(0.5);transform-origin: top left;margin-bottom: -400px;">
+        <iframe width="1050" height="800" src="https://dbs-chart.netlify.com/"></iframe>
+    </div>    
+  </AlternativeLayout>`,
+  components: { AlternativeLayout },
 };
 
 const AboutPage = {
-  template: `<main-layout>
- <h1>About page</h1>
- <p>Here should be smth about me</p>
- </main-layout>`,
-  components: { MainLayout }
+  template: `<MainLayout><h1>About page</h1><p>Here should be smth about me</p></MainLayout>`,
+  components: { MainLayout },
+};
+
+const TodosWrappedPage = {
+  template: `<AlternativeLayout><TodosPage/></AlternativeLayout>`,
+  components: { AlternativeLayout, TodosPage },
+};
+
+const ThreeJsPageWrapped = {
+  template: `<AlternativeLayout><ThreeJsPage/></AlternativeLayout>`,
+  components: { AlternativeLayout, ThreeJsPage },
+};
+
+const pageNotFound404 = {
+  components: { MainLayout },
+  template: `<main-layout><h1>Not found</h1><p>Page not found</p></main-layout>`,
 };
 
 new Vue({
-  el: '#vladds',
+  el: '#vue-landing',
   router: new VueRouter({
     routes: [
-      {path: '', name: 'VladdsPage', component: VladdsPage},
-      {path: '/', name: 'VladdsPage-with-slash', component: VladdsPage},
-      {path: '/todos', name: 'TodosPage', component: TodosPage},
+      { path: '', component: RootPage },
 
-      {path: '/about', name: 'AboutPage', component: AboutPage},
-      {path: '/my-projects', name: 'MyProjectsPage', component: MyProjectsPage},
-      {
-        path: "*",
-        component: {
-          components: {MainLayout},
-          template: `
-            <main-layout>
-             <h1>Not found</h1>
-             <p>Page that you wanted to access is not found</p>
-            </main-layout>`
-        }
-      },
-    ]
+      { path: '/',  component: RootPage },
+      { path: '/todos',  component: TodosWrappedPage },
+      { path: '/about',  component: AboutPage },
+      { path: '/git-projects', component: GitProjectsPage },
+      { path: '/globe', component: ThreeJsPageWrapped },
+
+      { path: "*", component: pageNotFound404 },
+    ],
   }),
-  render (h) { return h({template: `<router-view/>`}) }
+  render(h) { return h({ template: `<router-view/>` }) },
 })

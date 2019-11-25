@@ -1,3 +1,5 @@
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+
 module.exports = {
   runtimeCompiler: true,
   outputDir: './docs',
@@ -5,10 +7,10 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   css: { sourceMap: true },
   publicPath: '',
-  configureWebpack: config =>{
+  configureWebpack: config => {
     config.output.filename = '[name].js'
     config.output.chunkFilename = '[name].js'
-    config.plugins.forEach(({options = {}})=>{
+    config.plugins.forEach(({ options = {} }) => {
       switch (options.filename) {
         case 'index.html':
           options.minify.collapseWhitespace = false;
@@ -20,7 +22,12 @@ module.exports = {
       }
     });
 
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(new CompressionWebpackPlugin({ test: /\.js$/ }))
+    }
+
     config.module.rules = config.module.rules
-      .filter(({enforce}) => !enforce || enforce !== 'pre');
-  }
+      .filter(({ enforce }) => !enforce || enforce !== 'pre');
+  },
 }
+
