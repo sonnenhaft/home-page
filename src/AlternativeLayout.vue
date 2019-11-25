@@ -1,6 +1,6 @@
 <template>
     <div style="height: 100%">
-        <!--<MainMenu class="alternative-layout__main-menu" />-->
+        <MainMenu class="alternative-layout__main-menu" />
         <div style="padding: 8px">
             <slot />
         </div>

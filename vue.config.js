@@ -14,6 +14,7 @@ module.exports = {
   },
   publicPath: '',
   configureWebpack: config => {
+    config.devtool = 'source-map';
     config.output.filename = '[name].js'
     config.output.chunkFilename = '[name].js'
     config.plugins.forEach(({ options = {} }) => {
@@ -34,6 +35,6 @@ module.exports = {
 
     config.module.rules = config.module.rules
       .filter(({ enforce }) => !enforce || enforce !== 'pre');
-  },
+  }
 }
 

@@ -4,102 +4,100 @@
         <br />
         <pre v-if="error">{{error}}</pre>
 
-        <div v-for="(todoList, index) in items" v-bind:key="index"
+        <div v-for="(todoList, index) in filteredLists" v-bind:key="index"
              class="todo-item">
-            <button
-                    v-on:click="remove(index)"
-                    tabindex="-1">
-                x
-            </button>
+            <input type="text" placeholder="title"
+                   v-model="todoList.name"
+                   style="font-weight: bold;width: 100%;border: none;font-size: 15px;background: none"
+                   v-on:keyup="update(todoList)" />
 
-            <span>
-            [{{ todoList.items.filter(({value})=> value).length }} / {{ todoList.items.filter(({checked})=> checked).length }}]
-            </span>
+            <div style="margin: 8px 0">
+                <div v-if="!$route.params.id">
+                    <p-check tabindex="-1" class="p-switch p-fill"
+                             v-model="todoList.hidden"
+                             v-on:change="update(todoList)">
+                        Collapsed
+                    </p-check>
 
-            <h4>
-                <textarea placeholder="Type to add more"
-                          v-model="todoList.name"
-                          v-on:keyup="update(index)"></textarea>
-            </h4>
+                    <p-check tabindex="-1" class="p-switch p-fill"
+                             v-model="todoList.withTextArea"
+                             v-if="!todoList.hidden"
+                             v-on:change="update(todoList)">
+                        With Editor
+                    </p-check>
 
-            <div style="display: flex">
-                <div><EditableTodosList v-model="todoList.text" /></div>
+                    <button v-on:click="remove(todoList)" tabindex="-1">
+                        <font-awesome-icon icon="trash-alt" />
+                    </button>
 
-                <div>&nbsp;</div>
+                    <button v-on:click="clone(todoList)" tabindex="-1">
+                        <font-awesome-icon icon="clone" />
+                    </button>
 
-                <div><textarea style="height: 100%; min-width: 400px; line-height: 22px; padding-top: 0;padding-bottom: 10px;" v-model="text"/></div>
+                    <router-link :to="'/todos/' + todoList._id.$oid" tag="a"
+                                 v-if="todoList._id && !todoList.hidden">
+                        <font-awesome-icon icon="arrow-right" />
+                    </router-link>
+
+                    <div style="height: 8px"></div>
+                </div>
+
+                <div v-if="$route.params.id">
+                    <router-link :to="'/todos/'" tag="a" title="all">
+                        <font-awesome-icon icon="arrow-left" />
+                    </router-link>
+
+                    <span>&nbsp;</span>
+
+                    <p-check tabindex="-1" class="p-switch p-fill"
+                             v-model="todoList.withTextArea"
+                             v-if="!todoList.hidden"
+                             v-on:change="update(todoList)">
+                        With Editor
+                    </p-check>
+                </div>
             </div>
-            <!--<ul>-->
-                <!--<li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> !checked)"-->
-                    <!--v-bind:key="idx">-->
-                    <!--<div>-->
-                        <!--<input type="checkbox"-->
-                               <!--v-model="todoItem.checked"-->
-                               <!--tabindex="-1"-->
-                               <!--v-on:change="update(index)">-->
 
-                        <!--<input type="text" placeholder="Type to add more"-->
-                               <!--v-model="todoItem.value"-->
-                               <!--v-on:keyup.enter="createEmptyTodoItem(index, idx, $event)"-->
-                               <!--v-on:keyup="update(index)" />-->
-                    <!--</div>-->
+            <div style="display: flex" v-if="!todoList.hidden">
+                <EditableTodosList v-model="todoList.text"
+                                   v-on:input="update(todoList)" />
 
-                    <!--<button-->
-                            <!--:disabled="idx === 0"-->
-                            <!--v-on:click="removeTodoItem(index, idx)"-->
-                            <!--tabindex="-1">-->
-                        <!--x-->
-                    <!--</button>-->
-                <!--</li>-->
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-                <!--<li v-if="todoList.items.filter(({checked})=> checked).length">-->
-                    <!--<hr style="width: 100%" />-->
-                <!--</li>-->
-
-                <!--<li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> checked)"-->
-                    <!--v-bind:key="idx+'u'">-->
-                    <!--<div>-->
-                        <!--<input type="checkbox"-->
-                               <!--v-model="todoItem.checked"-->
-                               <!--tabindex="-1"-->
-                               <!--v-on:change="update(index)">-->
-
-                        <!--<i style="font-size: 90%; text-decoration: line-through;">-->
-                            <!--{{todoItem.value}}-->
-                        <!--</i>-->
-                    <!--</div>-->
-
-                    <!--<button-->
-                            <!--:disabled="idx === 0"-->
-                            <!--v-on:click="removeTodoItem(index, idx)"-->
-                            <!--tabindex="-1">-->
-                        <!--x-->
-                    <!--</button>-->
-                <!--</li>-->
-            <!--</ul>-->
-
-            <div v-on:click="todoList.showPre = !todoList.showPre">show as pre
-            </div>
-            <br>
-            <pre v-if="todoList.showPre">{{todoList.items.map(({value}) => value).join('\n')}}</pre>
-
-            <div v-on:click="removeEmptyTodoItems(index)">
-                remove empty
+                <textarea
+                        v-if="todoList.withTextArea"
+                        v-model="todoList.text" placeholder="As text..."
+                        v-on:input="update(todoList)" />
             </div>
         </div>
 
-        <div>
-            <input type="text" placeholder="Type to add new TODO list"
+        <div v-if="!$route.params.id" class="todo-item">
+            <input type="text" placeholder="Create new TODO list"
                    v-model="newItemValue"
-                   v-on:keyup.enter="createTodoList">
+                   v-on:keyup.enter="createTodoList()"
+                   style="color: transparent">
         </div>
     </div>
 </template>
 
 <script>
-  import EditableTodosList from './EditableTodosList.vue';
   import debounce from 'lodash/debounce';
-  import { TodosResource } from './TodosResource';
+  import EditableTodosList
+    from './EditableTodosList.vue';
+
+  import ReactResource from 'react-resource';
+
+  const TodosResource = new ReactResource(
+    `https://api.mongolab.com/api/1/databases/sonnenhaft2/collections/test-collection2/{:id}?apiKey=PGjxbP3NQzS2xXIe8PgSbJBxVzaPlXGe`,
+    { id: ':id' },
+    {
+      update: {
+        transformRequest: data => {
+          delete data.id;
+          return data;
+        }
+      }
+    });
 
   function setCache(value) {
     localStorage.setItem('todoResourceData', JSON.stringify(value))
@@ -133,60 +131,83 @@
       items: [],
       error: '',
       newItemValue: '',
-      newItemItemValue: '',
+      newItemItemValue: ''
     }),
 
+    computed: {
+      filteredLists() {
+        if (this.$route.params.id) {
+          return this.items.filter(item => item._id.$oid === this.$route.params.id);
+        } else {
+          return this.items;
+        }
+      }
+    },
+
     methods: {
-      async createEmptyTodoItem(index, idx, e) {
-        this.items[index].items.splice(idx + 1, 0, { value: '' })
-        this.update(index);
-
-        setTimeout(() => {
-          e.target.parentElement.parentElement.nextElementSibling.children[0].children[1].focus()
-        }, 0);
-      },
-
-      async removeTodoItem(index, idx) {
-        this.items[index].items.splice(idx, 1)
-        this.update(index);
-      },
-
-      async createTodoList() {
+      async createTodoList(data = { name: this.newItemValue || '', text: '' }) {
         this.loading = true;
 
-        const data = { name: this.newItemValue || '', items: [{}] };
+        data.withTextArea = false;
+        data.collapsed = false;
+
         this.newItemValue = '';
         this.items.push(data);
 
-        this.items[this.items.indexOf(data)] = await TodosResource.create(data);
+        const { _id } = await TodosResource.create(data);
+        data._id = _id;
 
         setCache(this.items)
         this.loading = false;
       },
 
-      remove(idx) {
-        const item = this.items[idx];
+      clone({ _id, __ob__, ...item }) {
+        this.createTodoList(item);
+      },
+
+      remove(item) {
         this.items.splice(this.items.indexOf(item), 1);
 
         setCache(this.items)
         TodosResource.delete({ id: item._id.$oid });
       },
 
-      removeEmptyTodoItems(index) {
-        const item = this.items[index];
-        item.items = item.items.filter(({ value }) => value);
-
-        this.update(index);
-      },
-
-      update: debounce(function(idx) {
-        const item = this.items[idx];
-
+      update: debounce(function(item) {
         setCache(this.items)
         TodosResource.update({ id: item._id.$oid, ...item });
-      }, 200),
-    },
+      }, 100)
+    }
   }
 </script>
 
-<style scoped src="./TodosPage.css"></style>
+<style scoped>
+    textarea {
+        min-height: 100%;
+        min-width: 460px;
+        line-height: 20px;
+        padding-top: 0;
+        background: none;
+    }
+
+    .loading {
+        position: absolute;
+    }
+
+    .todos-layout {
+        background-color: #ffffff;
+        color: #232527;
+        height: 100%;
+        padding: 8px;
+    }
+
+    .todo-item {
+        border-radius: 5px;
+        /*background-color: #fdfabd;*/
+        padding: 8px;
+        margin: 8px;
+        display: inline-block;
+        border: 1px solid #ebebeb;
+        vertical-align: top;
+    }
+
+</style>
