@@ -1,4 +1,4 @@
-.vladds {
+.main-layout {
   font-family: Helvetica, Arial, sans-serif;
   background: #222222;
   color: #525252;
@@ -9,7 +9,11 @@
 h1 {
   cursor: pointer;
   letter-spacing: 4px;
-  text-decoration: underline;
+  font-family: cursive, sans-serif;
+  padding-bottom: 7px;
+  border-bottom: 4px solid #525252;
+  display: inline;
+  text-decoration: none;
 }
 
 p {
@@ -47,7 +51,7 @@ footer  {
 
 .floating-nav {
   background: #e7e73b;
-  padding: 12px;
+  padding: 0 10px;
   border-radius: 4px 0 0 4px;
   box-shadow: 15px 0 23px -5px rgba(231, 231, 59, 0.75);
   font-size: 36px;
@@ -57,22 +61,33 @@ footer  {
   margin: 0;
   color: #3f3b00;
   text-transform: uppercase;
+  user-select: none;
+}
+
+.floating-nav:hover {
+  cursor: pointer;
+  opacity: 0.9;
 }
 
 .fullscreen-image {
   background: white;
   height: 100%;
-  width: 35%;
+  width: 40%;
   overflow: hidden;
+  position: relative;
 }
 
 .fullscreen-image img {
   min-height: 100%;
   min-width: 100%;
+  object-position: top;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .content {
-  width: 75%;
+  width: 60%;
   box-shadow: 14px 0 33px 0 rgba(0,0,0,0.75);
   height: 100%;
   z-index: 1;

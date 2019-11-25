@@ -1,18 +1,22 @@
 <template>
-  <div class="vladds">
+  <div class="main-layout">
     <div class="content">
       <div class="inner-content">
-        <h1>Vladd's</h1>
+        <slot/>
 
-        <p>
-          Vladd's is a home place for <br/>
-          one particular engineer.
-        </p>
 
         <nav>
-          <a href="#">Explore Work</a>
-          <a href="#">Learn About Us</a>
-          <a href="#">Read Our Minds</a>
+          <router-link tag="a" to="teams">
+            Teams I worked with
+          </router-link>
+
+          <router-link tag="a" to="my-projects">
+            Projects I have in git
+          </router-link>
+
+          <router-link tag="a" to="about">
+            About
+          </router-link>
         </nav>
 
         <footer>
@@ -40,19 +44,16 @@
     </div>
 
 
-    <div class="fullscreen-image">
+    <div class="fullscreen-image" ondragstart="return false">
       <img src="https://picsum.photos/200/600" alt="My photo">
-      <p>background</p>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'HelloWorld',
-    props: {
-      msg: String
-    }
+    name: 'main-layout',
+    props: { msg: String }
   }
 </script>
 
@@ -66,4 +67,5 @@
     height: 100%
   }
 </style>
-<style scoped src="./Vladds.css"></style>
+
+<style scoped src="./MainLayout.css"></style>
