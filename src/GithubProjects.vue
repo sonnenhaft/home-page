@@ -31,26 +31,33 @@
 
 
 <script>
+  const customUrls = {
+    'd3_gaeatan-chart': 'https://sonnenhaft.github.io/d3_gaeatan-chart/?stub',
+    'vue_paginatable-table': 'https://sonnenhaft.github.io/vue_paginatable-table/#/?stub',
+  };
+  
   const items = Object.entries({
-    'Vue Landing': 'vue-landing',
-    'Pokedex': 'ng_pokedex_lazy-scroll',
-    'Vue Paginatable table': 'vue_paginatable-table',
-    'EPAM Hackaton Training Portal': 'epam_hackaton_training-portal',
-    'Gl Data Sending': 'd3_gl-data-sensing',
-    'RL Kanban': 'rl-kanban',
-    'React video-carousel': 'react_video-carousel',
-    'React tenor-table': 'react_tenor-table',
-    'Hong chart': 'd3_hong-chart',
-    'Webpack starter': 'quick-webpack-bundle-analyzer-test-repo',
-    'DBS Chart': 'd3_dbs-chart',
     'LuckyDiem': 'luckydiem',
-    'jQuery Mobile Rss Reader for habrahabr': 'jquery_mobile_rss-reader_for_habrahabr',
-    'Gaeatan Chart': 'd3_gaeatan-chart',
+    'RL Kanban': 'rl-kanban',
+    'XM-Charts': 'xm-charts',
+    'Gl Data Sending': 'd3_gl-data-sensing',
+    'Pokedex': 'ng_pokedex_lazy-scroll',
+    'Vue Landing': 'vue-landing',        
+    'Hong chart': 'd3_hong-chart',
+    'Gaeatan Chart': 'd3_gaeatan-chart',    
+    'DBS Chart': 'd3_dbs-chart',    
     'Rock paper-scissors': 'ng2_rock-paper-scissors_simple',
+    'EPAM Hackaton Training Portal': 'epam_hackaton_training-portal',    
+    'Vue Paginatable table': 'vue_paginatable-table',
+    'React video-carousel': 'react_video-carousel',
+    'React tenor-table': 'react_tenor-table',    
+    'Webpack starter': 'quick-webpack-bundle-analyzer-test-repo',    
+    'd3-ts-charts_poc': 'd3-ts-charts_poc',
+    'jQuery Mobile Rss Reader for habrahabr': 'jquery_mobile_rss-reader_for_habrahabr',        
     'Mongolabs API demo': 'ng_mongolabs-free-api_demo-page'
   }).map(([name, value]) => ({
     name,
-    url: `https://sonnenhaft.github.io/${ value }`,
+    url: customUrls[value] || `https://sonnenhaft.github.io/${ value }`,
     git: `https://github.com/sonnenhaft/${ value }`
   }));
 
