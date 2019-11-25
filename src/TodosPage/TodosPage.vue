@@ -4,33 +4,33 @@
         <br />
         <pre v-if="error">{{error}}</pre>
 
-        <div v-for="(todoList, index) in filteredLists" v-bind:key="index"
+        <div v-for="(todoList, index) in filteredLists" :key="index"
              class="todo-item">
             <input type="text" placeholder="title"
                    v-model="todoList.name"
                    style="font-weight: bold;width: 100%;border: none;font-size: 15px;background: none"
-                   v-on:keyup="update(todoList)" />
+                   @keyup="update(todoList)" />
 
             <div style="margin: 8px 0">
                 <div v-if="!$route.params.id">
                     <p-check tabindex="-1" class="p-switch p-fill"
                              v-model="todoList.hidden"
-                             v-on:change="update(todoList)">
+                             @change="update(todoList)">
                         Collapsed
                     </p-check>
 
                     <p-check tabindex="-1" class="p-switch p-fill"
                              v-model="todoList.withTextArea"
                              v-if="!todoList.hidden"
-                             v-on:change="update(todoList)">
+                             @change="update(todoList)">
                         With Editor
                     </p-check>
 
-                    <button v-on:click="remove(todoList)" tabindex="-1">
+                    <button @click="remove(todoList)" tabindex="-1">
                         <font-awesome-icon icon="trash-alt" />
                     </button>
 
-                    <button v-on:click="clone(todoList)" tabindex="-1">
+                    <button @click="clone(todoList)" tabindex="-1">
                         <font-awesome-icon icon="clone" />
                     </button>
 
@@ -52,7 +52,7 @@
                     <p-check tabindex="-1" class="p-switch p-fill"
                              v-model="todoList.withTextArea"
                              v-if="!todoList.hidden"
-                             v-on:change="update(todoList)">
+                             @change="update(todoList)">
                         With Editor
                     </p-check>
                 </div>
@@ -60,21 +60,21 @@
 
             <div style="display: flex" v-if="!todoList.hidden">
                 <EditableTodosList v-model="todoList.text"
-                                   v-on:input="update(todoList)" />
+                                   @input="update(todoList)" />
 
                 <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
                 <textarea
                         v-if="todoList.withTextArea"
                         v-model="todoList.text" placeholder="As text..."
-                        v-on:input="update(todoList)" />
+                        @input="update(todoList)" />
             </div>
         </div>
 
         <div v-if="!$route.params.id" class="todo-item">
             <input type="text" placeholder="Create new TODO list"
                    v-model="newItemValue"
-                   v-on:keyup.enter="createTodoList()"
+                   @keyup.enter="createTodoList()"
                    style="color: transparent">
         </div>
     </div>

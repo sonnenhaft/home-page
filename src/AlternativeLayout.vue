@@ -1,6 +1,7 @@
 <template>
     <div style="height: 100%">
         <MainMenu class="alternative-layout__main-menu" />
+        sdfsdf
         <div style="padding: 8px">
             <slot />
         </div>

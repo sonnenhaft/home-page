@@ -11,38 +11,38 @@
             <li v-for="(todoItem, index) in unCheckedItems" :key="todoItem.id + ' ' + index">
                 <p-check color="danger-o" tabindex="-1"
                          v-model="todoItem.isChecked"
-                         v-on:change="update()">
+                         @change="update()">
                     <i slot="extra" class="icon mdi mdi-close"></i>
                 </p-check>
 
                 <input type="text" v-model="todoItem.text" tabindex="0"
                        placeholder="empty"
                        @paste="onPaste(todoItem, $event)"
-                       v-on:keyup.enter="addEmptyAfterThis(todoItem, $event)"
-                       v-on:keyup.delete="deleteEmpty(todoItem, $event)"
-                       v-on:keydown.up="focusUp(todoItem, $event)"
-                       v-on:keydown.down="focusDown(todoItem, $event)"
-                       v-on:keyup="update()">
+                       @keyup.enter="addEmptyAfterThis(todoItem, $event)"
+                       @keyup.delete="deleteEmpty(todoItem, $event)"
+                       @keydown.up="focusUp(todoItem, $event)"
+                       @keydown.down="focusDown(todoItem, $event)"
+                       @keyup="update()">
 
                 <star-rating v-model="todoItem.rating"
                              v-if="editableRating"
-                             v-on:rating-selected="update()"
+                             @rating-selected="update()"
                              :star-size="10" :show-rating="false"></star-rating>
                 <span v-if="!editableRating" title="rating">
                     {{ todoItem.rating }}
                 </span>
 
                 <div>&nbsp;</div>
-                <font-awesome-icon icon="times-circle" v-on:click="remove(todoItem)" style="cursor: pointer" />
+                <font-awesome-icon icon="times-circle" @click="remove(todoItem)" style="cursor: pointer" />
                 <div>&nbsp;</div>
-                <font-awesome-icon icon="arrow-circle-up" v-on:click="moveTop(todoItem)" style="cursor: pointer"
-                                   v-bind:style="{ cursor: 'pointer', visibility: index ? 'visible' : 'hidden' }" />
+                <font-awesome-icon icon="arrow-circle-up" @click="moveTop(todoItem)" style="cursor: pointer"
+                                   :style="{ cursor: 'pointer', visibility: index ? 'visible' : 'hidden' }" />
                 <div>&nbsp;</div>
 
                 <star-rating v-model="todoItem.effort"
                              v-if="editableRating"
                              active-color="red"
-                             v-on:rating-selected="update()"
+                             @rating-selected="update()"
                              :star-size="10" :show-rating="false"></star-rating>
 
                 <span v-if="!editableRating" title="effort">
@@ -52,7 +52,7 @@
             <li>
                 <input type="text" placeholder="Type to add new item"
                        v-model="newItemValue"
-                       v-on:keyup.enter="addEmptyAfterThis()">
+                       @keyup.enter="addEmptyAfterThis()">
             </li>
 
             <h5 v-if="checkedItems.length">
@@ -64,25 +64,25 @@
             <li v-for="todoItem in checkedItems" :key="todoItem.id">
                 <p-check class="p-default p-thick p-pulse"
                          v-model="todoItem.isChecked"
-                         v-on:change="update()" />
+                         @change="update()" />
 
                 <div style="text-decoration:  line-through; text-align: left;   width: 250px;
     overflow: hidden;">
                     {{todoItem.text}}
                 </div>
 
-                <input type="submit" value="X" v-on:click="remove(todoItem)">
+                <input type="submit" value="X" @click="remove(todoItem)">
             </li>
         </ul>
 
         <br>
 
-        <button v-on:click="removeEmpty()" v-if="nonEmpty.length !== items.length">
+        <button @click="removeEmpty()" v-if="nonEmpty.length !== items.length">
             <font-awesome-icon icon="trash-alt" />
             empty
         </button>
 
-        <button v-on:click="unselectAll()" v-if="checkedItems.length">
+        <button @click="unselectAll()" v-if="checkedItems.length">
             unselect all
         </button>
     </div>
@@ -90,6 +90,12 @@
 
 <script>
   import StarRating from 'vue-star-rating'
+
+  function focus(prev) {
+    if (prev) {
+      prev.children[1].focus();
+    }
+  }
 
   const n = num => isNaN(num - 0) ? 0 : num - 0;
 
@@ -168,33 +174,22 @@
         this.items.splice(this.items.indexOf(item), 1);
         this.update();
       },
-      deleteEmpty(item, e){
+      deleteEmpty(item, e) {
         if (!item.text.length) {
-          const prev = e.target.parentElement.previousElementSibling;
-          if (prev) {
-            prev.children[1].focus();
-          }
+          focus(e.target.parentElement.previousElementSibling);
           this.remove(item);
         }
       },
 
-      focusUp(item, e){
-          const prev = e.target.parentElement.previousElementSibling;
-          if (prev) {
-            prev.children[1].focus();
-          }
+      focusUp(item, e) {
+        focus(e.target.parentElement.previousElementSibling);
       },
-      focusDown(item, e){
-        const next = e.target.parentElement.nextElementSibling;
-        if (next) {
-          next.children[1].focus();
-        }
+      focusDown(item, e) {
+        focus(e.target.parentElement.nextElementSibling);
       },
       moveTop(item) {
-        const idx = this.items.indexOf(item)
-        this.items[idx] = this.items[idx - 1];
-        this.items[idx - 1] = item;
-        this.items = this.items.slice();
+        const idx = this.items.indexOf(item);
+        this.items.splice(idx - 1, 2, item, this.items[idx - 1]);
         this.update();
       },
       addEmptyAfterThis(item, e) {
@@ -205,7 +200,7 @@
         this.newItemValue = '';
         if (e) {
           setTimeout(() => {
-            e.target.parentElement.nextElementSibling.children[1].focus();
+            focus(e.target.parentElement.nextElementSibling);
           }, 10);
         }
 

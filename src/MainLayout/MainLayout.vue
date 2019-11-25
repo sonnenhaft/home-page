@@ -36,8 +36,8 @@
             <img
                     src="https://picsum.photos/200/600"
                     alt="nice background"
-                    v-on:load="onImageLoaded"
-                    v-bind:class="{ imageLoaded }">
+                    @load="onImageLoaded"
+                    :class="{ imageLoaded }">
         </div>
     </div>
 </template>
