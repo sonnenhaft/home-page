@@ -1,0 +1,47 @@
+[
+  {"name": "LuckyDiem", "value": "luckydiem", "type": "projects"},
+  {"name": "RL Kanban", "value": "rl-kanban", "type": "projects"},
+  {"name": "XM-Charts", "value": "xm-charts", "type": "projects"},
+  {"name": "Gl Data Sending", "value": "d3_gl-data-sensing", "type": "projects"},
+  {
+    "name": "PD corp - medical",
+    "value": "pd-corp_failed_mobx",
+    "type": "projects",
+    "url": "https://sonnenhaft.github.io/pd-corp_failed_mobx/#/assets?stub"
+  },
+  {
+    "name": "PandaX",
+    "value": "pandax_angular-1.5",
+    "type": "projects",
+    "url": "https://sonnenhaft.github.io/pandax_angular-1.5/#/login?email=provider1@panda.com&password=Password1&auto&stub&redirectUrl=/main/payments"
+  },
+  {"name": "Pokedex", "value": "ng_pokedex_lazy-scroll", "type": "test_tasks"},
+  {
+    "name": "Vue Landing",
+    "value": "vue-landing",
+    "type": "others",
+    "url": "https://sonnenhaft.github.io/vue-landing/#/about"
+  },
+  {"name": "Hong chart", "value": "d3_hong-chart", "type": "projects"},
+  {
+    "name": "Gaeatan Chart",
+    "value": "d3_gaeatan-chart",
+    "url": "https://sonnenhaft.github.io/d3_gaeatan-chart/?stub",
+    "type": "projects"
+  },
+  {"name": "DBS Chart", "value": "d3_dbs-chart", "type": "test_tasks"},
+  {"name": "Rock paper-scissors", "value": "ng2_rock-paper-scissors_simple", "type": "test_tasks"},
+  {"name": "EPAM Hackaton Training Portal", "value": "epam_hackaton_training-portal", "type": "others"},
+  {
+    "name": "Vue Paginatable table",
+    "value": "vue_paginatable-table",
+    "url": "https://sonnenhaft.github.io/vue_paginatable-table/#/?stub",
+    "type": "test_tasks"
+  },
+  {"name": "React video-carousel", "value": "react_video-carousel", "type": "test_tasks"},
+  {"name": "React tenor-table", "value": "react_tenor-table", "type": "test_tasks"},
+  {"name": "Webpack starter", "value": "quick-webpack-bundle-analyzer-test-repo", "type": "others"},
+  {"name": "d3-ts-charts_poc", "value": "d3-ts-charts_poc", "type": "others"},
+  {"name": "jQuery Mobile Rss Reader for habrahabr", "value": "jquery_mobile_rss-reader_for_habrahabr", "type": "others"},
+  {"name": "Mongolabs API demo", "value": "ng_mongolabs-free-api_demo-page", "type": "others"}
+]

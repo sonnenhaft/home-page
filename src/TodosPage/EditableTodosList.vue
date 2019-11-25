@@ -222,15 +222,15 @@
         cursor: pointer;
         background: transparent;
         display: inline-block;
-    }
 
-    [type=text] {
-        width: 250px;
-        border-color: transparent;
-    }
+        &[type=text] {
+            width: 250px;
+            border-color: transparent;
+        }
 
-    input[type=checkbox] {
-        vertical-align: middle;
+        &[type=checkbox] {
+            vertical-align: middle;
+        }
     }
 
     li {
@@ -256,10 +256,10 @@
         height: 16px;
         font-size: 6px;
         font-weight: bold;
-    }
 
-    [type=submit]:hover {
-        color: white;
-        background-color: rgba(72, 72, 72, 0.59);
+        &:hover {
+            color: white;
+            background-color: rgba(72, 72, 72, 0.59);
+        }
     }
 </style>

@@ -2,7 +2,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   runtimeCompiler: true,
-  outputDir: './docs',
+  outputDir: './build',
   filenameHashing: false,
   lintOnSave: process.env.NODE_ENV !== 'production',
   css: { sourceMap: true },
@@ -37,4 +37,3 @@ module.exports = {
       .filter(({ enforce }) => !enforce || enforce !== 'pre');
   }
 }
-

@@ -13,14 +13,11 @@
                         </a>
                     </address>
 
-                    <address>
-                        Singapore, <span>April 2019</span>
-                    </address>
+                    <address>Singapore, <span>April 2019</span></address>
 
                     designed by
 
-                    <a target="_blank"
-                       href="https://speckyboy.com/25-beautiful-clean-web-designs/">
+                    <a target="_blank" href="https://speckyboy.com/25-beautiful-clean-web-designs/">
                         drxlr.com
                     </a>
                 </footer>
@@ -30,7 +27,6 @@
                 ☰
             </nav>
         </div>
-
 
         <div class="fullscreen-image" ondragstart="return false">
             <img
@@ -58,25 +54,3 @@
 
 <style src="../global.css"></style>
 <style scoped src="./MainLayout.css"></style>
-
-<style>
-    .main-layout__main-menu a {
-        text-decoration: none;
-        margin-right: 20px;
-    }
-
-    .main-layout__main-menu a:hover {
-        text-decoration: underline;
-    }
-
-    .main-layout__main-menu {
-        margin-bottom: 60px;
-    }
-
-    .main-layout__main-menu a {
-        text-decoration: underline;
-        color: inherit;
-        font-weight: bold;
-        font-size: 12px;
-    }
-</style>

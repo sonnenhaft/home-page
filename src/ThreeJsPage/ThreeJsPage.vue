@@ -2,14 +2,6 @@
     <canvas ref="canvas"></canvas>
 </template>
 
-<style scoped>
-    canvas {
-        background: black;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
 <script>
   import RenderThreeTubeAsync from './RenderThreeTubeAsync';
 
@@ -26,3 +18,11 @@
     },
   }
 </script>
+
+<style scoped>
+    canvas {
+        background: black;
+        width: 100%;
+        height: 100%;
+    }
+</style>
