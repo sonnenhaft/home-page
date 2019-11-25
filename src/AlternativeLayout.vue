@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <MainMenu class="alternative-layout__main-menu" />
-        <slot />
+    <div style="height: 100%">
+        <!--<MainMenu class="alternative-layout__main-menu" />-->
+        <div style="padding: 8px">
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -12,12 +14,6 @@
 </script>
 
 <style src="./global.css"></style>
-
-<style scoped>
-    div {
-        height: 100%;
-    }
-</style>
 <style>
     .alternative-layout__main-menu {
         background: black;

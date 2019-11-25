@@ -8,3 +8,12 @@ body {
     margin: 0;
     padding: 0;
 }
+
+li {
+    list-style: none;
+}
+
+li, ul, h4 {
+    padding: 0;
+    margin: 0;
+}

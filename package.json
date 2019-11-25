@@ -21,6 +21,7 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "compression-webpack-plugin": "^2.0.0",
+    "error-overlay-webpack-plugin": "^0.3.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "lodash": "^4.17.11",

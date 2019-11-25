@@ -6,6 +6,12 @@ module.exports = {
   filenameHashing: false,
   lintOnSave: process.env.NODE_ENV !== 'production',
   css: { sourceMap: true },
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  },
   publicPath: '',
   configureWebpack: config => {
     config.output.filename = '[name].js'

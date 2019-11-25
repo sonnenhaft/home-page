@@ -1,21 +1,18 @@
 <template>
     <nav>
-        <router-link v-for="link in links" tag="a" :to="link.path">
-            {{link.text}}
+        <router-link v-for="{ path, text } in links" :key="path"
+                     :to="path" tag="a">
+            {{text}}
         </router-link>
     </nav>
 </template>
 
 <script>
+  let links = [{ path: '/', text: 'error - links not set' }];
+  export const setLinks = _links => links = _links;
+
   export default {
-    data: () => ({
-      links: [
-        { path: '/', text: 'Root' },
-        { path: 'teams', text: 'My teams (tbd)' },
-        { path: 'git-projects', text: 'Git projects' },
-        { path: 'globe', text: 'ThreeJS' },
-        { path: 'todos', text: 'My TODOs' },
-      ],
-    }),
+    name: 'main-menu',
+    data: () => ({ links }),
   }
 </script>

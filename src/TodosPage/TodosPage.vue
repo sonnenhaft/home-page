@@ -22,54 +22,61 @@
                           v-on:keyup="update(index)"></textarea>
             </h4>
 
-            <ul>
-                <li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> !checked)"
-                    v-bind:key="idx">
-                    <div>
-                        <input type="checkbox"
-                               v-model="todoItem.checked"
-                               tabindex="-1"
-                               v-on:change="update(index)">
+            <div style="display: flex">
+                <div><EditableTodosList v-model="todoList.text" /></div>
 
-                        <input type="text" placeholder="Type to add more"
-                               v-model="todoItem.value"
-                               v-on:keyup.enter="createEmptyTodoItem(index, idx, $event)"
-                               v-on:keyup="update(index)" />
-                    </div>
+                <div>&nbsp;</div>
 
-                    <button
-                            :disabled="idx === 0"
-                            v-on:click="removeTodoItem(index, idx)"
-                            tabindex="-1">
-                        x
-                    </button>
-                </li>
+                <div><textarea style="height: 100%; min-width: 400px; line-height: 22px; padding-top: 0;padding-bottom: 10px;" v-model="text"/></div>
+            </div>
+            <!--<ul>-->
+                <!--<li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> !checked)"-->
+                    <!--v-bind:key="idx">-->
+                    <!--<div>-->
+                        <!--<input type="checkbox"-->
+                               <!--v-model="todoItem.checked"-->
+                               <!--tabindex="-1"-->
+                               <!--v-on:change="update(index)">-->
 
-                <li v-if="todoList.items.filter(({checked})=> checked).length">
-                    <hr style="width: 100%" />
-                </li>
+                        <!--<input type="text" placeholder="Type to add more"-->
+                               <!--v-model="todoItem.value"-->
+                               <!--v-on:keyup.enter="createEmptyTodoItem(index, idx, $event)"-->
+                               <!--v-on:keyup="update(index)" />-->
+                    <!--</div>-->
 
-                <li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> checked)"
-                    v-bind:key="idx+'u'">
-                    <div>
-                        <input type="checkbox"
-                               v-model="todoItem.checked"
-                               tabindex="-1"
-                               v-on:change="update(index)">
+                    <!--<button-->
+                            <!--:disabled="idx === 0"-->
+                            <!--v-on:click="removeTodoItem(index, idx)"-->
+                            <!--tabindex="-1">-->
+                        <!--x-->
+                    <!--</button>-->
+                <!--</li>-->
 
-                        <i style="font-size: 90%; text-decoration: line-through;">
-                            {{todoItem.value}}
-                        </i>
-                    </div>
+                <!--<li v-if="todoList.items.filter(({checked})=> checked).length">-->
+                    <!--<hr style="width: 100%" />-->
+                <!--</li>-->
 
-                    <button
-                            :disabled="idx === 0"
-                            v-on:click="removeTodoItem(index, idx)"
-                            tabindex="-1">
-                        x
-                    </button>
-                </li>
-            </ul>
+                <!--<li v-for="(todoItem, idx) in todoList.items.filter(({checked})=> checked)"-->
+                    <!--v-bind:key="idx+'u'">-->
+                    <!--<div>-->
+                        <!--<input type="checkbox"-->
+                               <!--v-model="todoItem.checked"-->
+                               <!--tabindex="-1"-->
+                               <!--v-on:change="update(index)">-->
+
+                        <!--<i style="font-size: 90%; text-decoration: line-through;">-->
+                            <!--{{todoItem.value}}-->
+                        <!--</i>-->
+                    <!--</div>-->
+
+                    <!--<button-->
+                            <!--:disabled="idx === 0"-->
+                            <!--v-on:click="removeTodoItem(index, idx)"-->
+                            <!--tabindex="-1">-->
+                        <!--x-->
+                    <!--</button>-->
+                <!--</li>-->
+            <!--</ul>-->
 
             <div v-on:click="todoList.showPre = !todoList.showPre">show as pre
             </div>
@@ -90,6 +97,7 @@
 </template>
 
 <script>
+  import EditableTodosList from './EditableTodosList.vue';
   import debounce from 'lodash/debounce';
   import { TodosResource } from './TodosResource';
 
@@ -103,6 +111,10 @@
   }
 
   export default {
+    components: {
+      EditableTodosList
+    },
+
     async created() {
       this.items = getCache([])
       try {
