@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainLayout from './MainLayout.vue'
+import MainLayout from './MainLayout/MainLayout.vue'
+import NavigationMenu from './NavigationMenu.vue'
+import TodosPage from './TodosPage/TodosPage.vue'
 
+Vue.use(NavigationMenu)
 Vue.use(VueRouter)
-
 Vue.config.productionTip = false
 
 const VladdsPage = {
@@ -33,26 +35,28 @@ const AboutPage = {
   components: { MainLayout }
 };
 
-const NotFound = {
-  template: `<main-layout>
- <h1>Not found</h1>
- <p>Page that you wanted to access is not found</p>
- </main-layout>`,
-  components: { MainLayout }
-};
-
 new Vue({
   el: '#vladds',
   router: new VueRouter({
     routes: [
       {path: '', name: 'VladdsPage', component: VladdsPage},
       {path: '/', name: 'VladdsPage-with-slash', component: VladdsPage},
+      {path: '/todos', name: 'TodosPage', component: TodosPage},
 
       {path: '/about', name: 'AboutPage', component: AboutPage},
       {path: '/my-projects', name: 'MyProjectsPage', component: MyProjectsPage},
-
-      { path: "*", component: NotFound },
+      {
+        path: "*",
+        component: {
+          components: {MainLayout},
+          template: `
+            <main-layout>
+             <h1>Not found</h1>
+             <p>Page that you wanted to access is not found</p>
+            </main-layout>`
+        }
+      },
     ]
   }),
-  render (h) { return h({template: `<router-view></router-view>`}) }
+  render (h) { return h({template: `<router-view/>`}) }
 })

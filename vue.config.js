@@ -8,8 +8,6 @@ module.exports = {
   configureWebpack: config =>{
     config.output.filename = '[name].js'
     config.output.chunkFilename = '[name].js'
-    // config.assetsPublicPath = '';
-
     config.plugins.forEach(({options = {}})=>{
       switch (options.filename) {
         case 'index.html':
@@ -21,5 +19,8 @@ module.exports = {
           break;
       }
     });
+
+    config.module.rules = config.module.rules
+      .filter(({enforce}) => !enforce || enforce !== 'pre');
   }
 }

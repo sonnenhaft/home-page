@@ -70,11 +70,12 @@ footer  {
 }
 
 .fullscreen-image {
-  background: white;
   height: 100%;
   width: 40%;
   overflow: hidden;
   position: relative;
+  background-color: #8f8f8f;
+  color: transparent;
 }
 
 .fullscreen-image img {
@@ -84,6 +85,12 @@ footer  {
   position: absolute;
   right: 0;
   bottom: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fullscreen-image img.imageLoaded {
+  opacity: 1;
 }
 
 .content {

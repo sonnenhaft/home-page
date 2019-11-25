@@ -4,20 +4,7 @@
       <div class="inner-content">
         <slot/>
 
-
-        <nav>
-          <router-link tag="a" to="teams">
-            Teams I worked with
-          </router-link>
-
-          <router-link tag="a" to="my-projects">
-            Projects I have in git
-          </router-link>
-
-          <router-link tag="a" to="about">
-            About
-          </router-link>
-        </nav>
+        <navigation-menu/>
 
         <footer>
           <address>
@@ -45,15 +32,30 @@
 
 
     <div class="fullscreen-image" ondragstart="return false">
-      <img src="https://picsum.photos/200/600" alt="My photo">
+      <img
+          src="https://picsum.photos/200/600"
+          alt="nice background"
+          v-on:load="onImageLoaded"
+          v-bind:class="{ imageLoaded }">
     </div>
   </div>
 </template>
 
 <script>
+  import NavigationMenu from '../NavigationMenu';
   export default {
     name: 'main-layout',
-    props: { msg: String }
+    components: {NavigationMenu},
+    data() {
+      return {
+        imageLoaded: false
+      }
+    },
+    methods: {
+      onImageLoaded() {
+        this.imageLoaded = true;
+      },
+    }
   }
 </script>
 
