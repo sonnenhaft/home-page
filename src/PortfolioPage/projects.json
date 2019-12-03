@@ -17,10 +17,10 @@
   },
   {"name": "Pokedex", "value": "ng_pokedex_lazy-scroll", "type": "test_tasks"},
   {
-    "name": "Vue Landing",
-    "value": "vue-landing",
+    "name": "Vue Home Page",
+    "value": "home-page",
     "type": "others",
-    "url": "https://sonnenhaft.github.io/vue-landing/#/about"
+    "url": "https://sonnenhaft.github.io/home-page/#/about"
   },
   {"name": "Hong chart", "value": "d3_hong-chart", "type": "projects"},
   {
@@ -40,7 +40,7 @@
   },
   {"name": "React video-carousel", "value": "react_video-carousel", "type": "test_tasks"},
   {"name": "React tenor-table", "value": "react_tenor-table", "type": "test_tasks"},
-  {"name": "Webpack starter", "value": "quick-webpack-bundle-analyzer-test-repo", "type": "others"},
+  {"name": "My Webpack starter", "value": "webpack-build", "type": "others"},
   {"name": "d3-ts-charts_poc", "value": "d3-ts-charts_poc", "type": "others"},
   {"name": "jQuery Mobile Rss Reader for habrahabr", "value": "jquery_mobile_rss-reader_for_habrahabr", "type": "others"},
   {"name": "Mongolabs API demo", "value": "ng_mongolabs-free-api_demo-page", "type": "others"}
