@@ -12,7 +12,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.8",
     "core-js": "^3.4.1",
     "dat.gui": "^0.7.6",
-    "three": "^0.110.0",
+    "three": "^0.125.0",
     "vue": "^2.6.10",
     "vue-rate": "^2.2.0",
     "vue-router": "^3.1.3"
