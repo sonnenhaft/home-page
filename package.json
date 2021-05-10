@@ -28,7 +28,7 @@
     "eslint": "^6.6.0",
     "eslint-plugin-vue": "^6.0.1",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "postcss-preset-env": "^6.7.0",
     "pretty-checkbox-vue": "^1.1.9",
     "react-resource": "^2.0.7",
